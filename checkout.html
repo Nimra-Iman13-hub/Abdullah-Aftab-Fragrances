@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout</title>
@@ -178,6 +170,18 @@ textarea{
 .back-btn:hover{
   color:var(--gold);
 }
+
+@media(max-width:768px){
+  body{
+    padding:40px 15px;
+  }
+  .checkout-header h1{
+    font-size:2.5rem;
+  }
+  .checkout-box{
+    padding:2rem 1.5rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -262,8 +266,5 @@ cart.forEach(item => {
 totalPrice.textContent = "Rs " + total.toLocaleString();
 </script>
 
-
-</body>
-</html>
 </body>
 </html>
