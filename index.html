@@ -14,7 +14,7 @@
 --ivory:#F8F7F5;--beige:#EAE5DE;--taupe:#B8AEA2;--charcoal:#222222;--gold:#C7A56A;--gold-light:#E8D5A3;--white:#FFFFFF;
 --font-script:'Dancing Script',cursive;--font-serif:'Cormorant Garamond',serif;--font-sans:'Montserrat',sans-serif;
 }
-body{font-family:var(--font-sans);background:var(--ivory);color:var(--charcoal);overflow-x:hidden;pointer-events:auto}
+body{font-family:var(--font-sans);background:var(--ivory);color:var(--charcoal);overflow-x:hidden;pointer-events:auto;padding-top:70px}
 /* Ensure interactive elements are clickable */
 button, a, [onclick], input, select, textarea, .size-opt, .add-cart-btn, .action-btn, .filter-btn, .show-more-btn, .btn-primary, .btn-outline, .checkout-btn, .continue-btn, .qty-btn, .remove-btn, .cart-close, .modal-close {
   pointer-events: auto !important;
@@ -105,7 +105,7 @@ nav a:hover{opacity:1;color:var(--gold)}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
 /* CATEGORIES */
-.section{padding:6rem 3rem}
+.section{padding:6rem 3rem;scroll-margin-top:80px}
 .section-eyebrow{font-family:var(--font-sans);font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:.75rem}
 .section-title{font-family:var(--font-serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;text-align:center;color:var(--charcoal);margin-bottom:.5rem}
 .section-title em{font-style:italic}
@@ -731,7 +731,7 @@ textarea {
     <div class="test-card">
       <div class="test-quote">"</div>
       <div class="test-stars">★★★★★</div>
-      <p class="test-text">Ordered the private label package for my boutique. Abdullah Aftab delivered beyond expectations — professional, quality, and on time.</p>
+      <p class="test-text">Ordered the private label package for my company. Abdullah Aftab delivered beyond expectations — professional, quality, and on time.</p>
       <div class="test-author">— Adnan Haroon, Usama Electric Company</div>
     </div>
     <div class="test-card">
@@ -894,7 +894,17 @@ textarea {
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<script>
+
+    <div style="font-family:var(--font-sans);font-size:.55rem;color:var(--taupe);margin-bottom:1rem;text-align:center">Shipping calculated at checkout</div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    <button class="continue-btn" onclick="closeCart()">Continue Shopping</button>`;
+}
+
+function changeQty(key, delta) {
+  const item = cart.find(c=>c.key===key);
+  if(!item) return;
+  item.qty = Math.max(0, item.qty + delta);
+  if(item.qty===0) cart = cart.filter(c=>c.key!==key);<script>
 
 
 
@@ -1173,16 +1183,6 @@ function renderCartItems() {
   const total = cart.reduce((s,c)=>s+c.price*c.qty,0);
   footer.innerHTML=`
     <div class="cart-subtotal"><span>Subtotal</span><span>${formatPrice(total)}</span></div>
-    <div style="font-family:var(--font-sans);font-size:.55rem;color:var(--taupe);margin-bottom:1rem;text-align:center">Shipping calculated at checkout</div>
-    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
-    <button class="continue-btn" onclick="closeCart()">Continue Shopping</button>`;
-}
-
-function changeQty(key, delta) {
-  const item = cart.find(c=>c.key===key);
-  if(!item) return;
-  item.qty = Math.max(0, item.qty + delta);
-  if(item.qty===0) cart = cart.filter(c=>c.key!==key);
   updateCartCount();
   renderCartItems();
 }
